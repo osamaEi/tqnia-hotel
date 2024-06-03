@@ -28,14 +28,18 @@
 @auth
                                 <li>
     <i class='bx bxs-user-pin'></i>
-    <a href="{{ route('dashboard') }}">Dashboard</a>
+    <a href="">Dashboard</a>
 </li>
 
 <li>
     <i class='bx bxs-user-rectangle'></i>
-    <a href="{{ route('user.logout') }}">Logout</a>
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="dropdown-item d-flex align-items-center">
+            <i class="bx bx-log-out-circle"></i><span>Logout</span>
+        </button>
+    </form>
 </li>
-
 
 @else
 

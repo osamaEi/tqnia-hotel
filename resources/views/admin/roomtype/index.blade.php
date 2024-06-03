@@ -9,7 +9,7 @@
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
 
-                <a href="{{ route('add.room.type') }}" class="btn btn-outline-primary px-5 radius-30"> Add Room Type </a>                
+                <a href="{{ route('roomtype.create') }}" class="btn btn-outline-primary px-5 radius-30"> Add Room Type </a>                
             </ol>
             </nav>
         </div>
@@ -25,27 +25,30 @@
                     <thead>
                         <tr>
                             <th>Sl</th>
-                            <th>Image</th>
                             <th>Name</th> 
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                       @foreach ($allData as $key=> $item ) 
-
-           @php
-            $rooms = App\Models\Room::where('roomtype_id',$item->id)->get();
-        @endphp
+                       @foreach ($roomTypes as $key=> $roomtype ) 
 
                         <tr>
                             <td>{{ $key+1 }}</td>
-                            <td> <img src="{{ (!empty($item->room->image)) ? url('upload/roomimg/'.$item->room->image) : url('upload/no_image.jpg') }}" alt="" style="width: 50px; height:30px;" >   </td>                            <td>{{ $item->name }}</td> 
-                            <td>
-                            @foreach ($rooms as $roo) 
-    <a href="{{ route('edit.room',$roo->id) }}" class="btn btn-warning px-3 radius-30"> Edit</a>
-    <a href=" " class="btn btn-danger px-3 radius-30" id="delete"> Delete</a>
-    @endforeach  
 
+                            <td>{{ $roomtype->name }}</td>
+                    
+                            <td>
+
+    <a href="{{ route ('roomtype.edit',$roomtype->id)}}" class="btn btn-warning px-3 radius-30"> Edit</a>
+
+   <form method="POST" action="{{ route('roomtype.destroy', $roomtype->id) }}" id="deleteForm">
+    @csrf
+    @method('DELETE')
+
+    <button type="submit" class="btn btn-danger px-3 radius-30" id="delete">Delete</button>
+</form>
+
+                                </td>
                             </td>
                         </tr>
                         @endforeach 
@@ -61,6 +64,13 @@
 
 </div>
 
+<script>
+    document.getElementById('delete').addEventListener('click', function(event) {
+        if (!confirm('Are you sure you want to delete this room type?')) {
+            event.preventDefault(); // Prevent form submission if user cancels deletion
+        }
+    });
+</script>
 
 
 

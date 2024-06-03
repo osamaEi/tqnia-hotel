@@ -22,7 +22,7 @@ $profileData = App\Models\User::find($id);
 <a href="{{ route('dashboard') }}">User Dashboard</a>
 </li>
 <li>
-<a href="{{ route('user.profile') }}">User Profile </a>
+<a href="">User Profile </a>
 </li>
 <li>
 <a href="#">Change Password</a>
@@ -31,7 +31,7 @@ $profileData = App\Models\User::find($id);
 <a href="#">Booking Details </a>
 </li>
 <li>
-<a href="{{route('user.logout')}}">Logout </a>
+<a href="">Logout </a>
 </li>
 </ul>
         </div>

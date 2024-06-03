@@ -34,8 +34,11 @@ class AuthenticatedSessionController extends Controller
             // Authentication passed for admin guard
             $request->session()->regenerate();
             return redirect()->route('admin.index');
+        }elseif (Auth::guard('web')->attempt($credentials)) {
+            // Authentication passed for admin guard
+            $request->session()->regenerate();
+            return redirect()->route('dashboard');
         }
-
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ]);

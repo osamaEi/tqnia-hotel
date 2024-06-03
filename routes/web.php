@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Room\RoomController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Room\RoomTypeController;
 use App\Http\Controllers\Employee\EmployeeController;
 
 
@@ -10,9 +12,9 @@ Route::get('/', function () {
       return view('frontend.index');
     });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    Route::get('/dashboard', function () {
+        return view('frontend.dashboard.user_dashboard');
+      })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -26,6 +28,10 @@ require __DIR__.'/auth.php';
 Route::middleware('admin')->group(function () {
 
     Route::get('/admin/dashboard',[AdminController::class,'AdminDashboard'])->name('admin.index');
+
+    Route::resource('roomtype',RoomTypeController::class);
+    
+    Route::resource('room',RoomController::class);
 
 
 
