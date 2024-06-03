@@ -1,11 +1,14 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Employee\EmployeeController;
+
 
 Route::get('/', function () {
-    return view('welcome');
-});
+      return view('frontend.index');
+    });
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -18,3 +21,20 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::middleware('admin')->group(function () {
+
+    Route::get('/admin/dashboard',[AdminController::class,'AdminDashboard'])->name('admin.index');
+
+
+
+});
+
+Route::middleware('employee')->group(function () {
+
+    Route::get('/employee/dashboard',[EmployeeController::class,'EmployeeDashboard'])->name('employee.index');
+
+
+
+});
