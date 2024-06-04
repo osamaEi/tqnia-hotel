@@ -28,12 +28,26 @@
 					<a href="javascript:;" class="has-arrow">
 						<div class="parent-icon"><i class='bx bx-home-alt'></i>
 						</div>
-						<div class="menu-title">Rooms</div>
+						<div class="menu-title">Rooms types</div>
 					</a>
 					<ul>
 						<li> <a href="{{ route('roomtype.create')}}"><i class='bx bx-radio-circle'></i> create room type</a>
 						</li>
-					
+						<li> <a href="{{ route('roomtype.index')}}"><i class='bx bx-radio-circle'></i> show room type</a>
+						</li>
+					</ul>
+				</li>
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon"><i class='bx bx-home-alt'></i>
+						</div>
+						<div class="menu-title">Rooms </div>
+					</a>
+					<ul>
+						<li> <a href="{{ route('room.create')}}"><i class='bx bx-radio-circle'></i> create room </a>
+						</li>
+						<li> <a href="{{ route('room.index')}}"><i class='bx bx-radio-circle'></i> show room </a>
+						</li>
 					</ul>
 				</li>
 

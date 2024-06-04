@@ -7,40 +7,41 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Room\RoomTypeController;
 use App\Http\Controllers\Employee\EmployeeController;
 
-
+// Public routes
 Route::get('/', function () {
-      return view('frontend.index');
-    });
+    return view('frontend.index');
+});
 
-    Route::get('/dashboard', function () {
-        return view('frontend.dashboard.user_dashboard');
-      })->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('frontend.dashboard.user_dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
+// Profile routes (authenticated users only)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+// Auth routes
 require __DIR__.'/auth.php';
 
+// Admin routes (admin middleware)
+Route::middleware(['admin'])->group(function () {
+    Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.index');
 
-Route::middleware('admin')->group(function () {
-
-    Route::get('/admin/dashboard',[AdminController::class,'AdminDashboard'])->name('admin.index');
-
-    Route::resource('roomtype',RoomTypeController::class);
+    Route::post('admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
+    Route::resource('roomtype', RoomTypeController::class);
     
-    Route::resource('room',RoomController::class);
-
-
-
+    Route::resource('room', RoomController::class);
+    
 });
+Route::post('/rooms/{id}/update-status', [RoomController::class, 'updateStatus'])->name('room.update-status');
 
-Route::middleware('employee')->group(function () {
-
-    Route::get('/employee/dashboard',[EmployeeController::class,'EmployeeDashboard'])->name('employee.index');
-
-
+// Employee routes (employee middleware)
+Route::middleware(['employee'])->group(function () {
+    Route::get('/employee/dashboard', [EmployeeController::class, 'EmployeeDashboard'])->name('employee.index');
+    Route::get('/employee/rooms', [EmployeeController::class, 'roomsView'])->name('room.employee.view');
+    Route::post('employee/logout', [EmployeeController::class, 'destroy'])->name('employee.logout');
 
 });

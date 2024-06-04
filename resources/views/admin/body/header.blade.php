@@ -602,7 +602,7 @@
 							<li>
 								<div class="dropdown-divider mb-0"></div>
 							</li>
-							<li><a class="dropdown-item d-flex align-items-center" href=""> <form method="POST" action="{{ route('logout') }}">
+							<li><a class="dropdown-item d-flex align-items-center" href=""> <form method="POST" action="{{ route('admin.logout') }}">
 								@csrf
 								<button type="submit" class="dropdown-item d-flex align-items-center">
 									<i class="bx bx-log-out-circle"></i><span>Logout</span>

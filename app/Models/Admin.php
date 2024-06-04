@@ -11,6 +11,8 @@ class Admin extends Model implements Authenticatable
     use HasFactory;
 
 
+    protected $guard= 'admin';
+
     protected $guarded=[];
 
 

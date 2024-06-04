@@ -15,8 +15,9 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('room_type_id');
             $table->string('room_name');
+            $table->string('image');
             $table->string('description')->nullable();
-            $table->integer('room_number');
+            $table->integer('room_number')->unique();
             $table->enum('status', ['available', 'booked', 'pending'])->default('available');
             $table->timestamps();
 

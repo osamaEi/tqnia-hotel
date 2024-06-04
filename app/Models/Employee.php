@@ -10,6 +10,7 @@ class Employee extends Model implements Authenticatable
 {
     use HasFactory;
 
+    protected $guard= 'emplopyee';
 
     protected $guarded=[];
 
