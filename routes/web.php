@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Room\RoomController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Room\RoomTypeController;
 use App\Http\Controllers\Employee\EmployeeController;
 
@@ -34,7 +35,8 @@ Route::middleware(['admin'])->group(function () {
     Route::resource('roomtype', RoomTypeController::class);
     
     Route::resource('room', RoomController::class);
-    
+
+
 });
 Route::post('/rooms/{id}/update-status', [RoomController::class, 'updateStatus'])->name('room.update-status');
 
@@ -43,5 +45,13 @@ Route::middleware(['employee'])->group(function () {
     Route::get('/employee/dashboard', [EmployeeController::class, 'EmployeeDashboard'])->name('employee.index');
     Route::get('/employee/rooms', [EmployeeController::class, 'roomsView'])->name('room.employee.view');
     Route::post('employee/logout', [EmployeeController::class, 'destroy'])->name('employee.logout');
+
+});
+
+
+Route::middleware('auth:admin,employee')->group(function () {
+
+    Route::post('/bookings/{booking}/update', [BookingController::class, 'update'])->name('admin.bookings.update');
+    Route::get('/bookings', [BookingController::class, 'index'])->name('admin.bookings.index');
 
 });
