@@ -1,4 +1,4 @@
-@extends('admin.admin_dashboard')
+@extends('backend.admin_dashboard')
 @section('admin') 
 
 <div class="page-content">
@@ -39,14 +39,17 @@
                     
                             <td>
 
-    <a href="{{ route ('roomtype.edit',$roomtype->id)}}" class="btn btn-warning px-3 radius-30"> Edit</a>
-
-   <form method="POST" action="{{ route('roomtype.destroy', $roomtype->id) }}" id="deleteForm">
-    @csrf
-    @method('DELETE')
-
-    <button type="submit" class="btn btn-danger px-3 radius-30" id="delete">Delete</button>
-</form>
+                                <div class="d-flex">
+                                    <a href="{{ route('roomtype.edit', $roomtype->id) }}" class="btn btn-warning me-2">Edit</a>
+                                
+                                    <form method="POST" action="{{ route('roomtype.destroy', $roomtype->id) }}" id="deleteForm">
+                                        @csrf
+                                        @method('DELETE')
+                                
+                                        <button type="submit" class="btn btn-danger" id="delete">Delete</button>
+                                    </form>
+                                </div>
+                                
 
                                 </td>
                             </td>

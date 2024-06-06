@@ -26,7 +26,7 @@ class RoomTypeController extends Controller
          }
  
          $roomTypes = RoomType::all();
-         return view('admin.roomtype.index', compact('roomTypes'));
+         return view('backend.roomtype.index', compact('roomTypes'));
      }
 
     /**
@@ -38,7 +38,7 @@ class RoomTypeController extends Controller
             abort(403, 'Unauthorized');
         }
 
-        return view('admin.roomtype.create');
+        return view('backend.roomtype.create');
     }
 
     /**
@@ -65,7 +65,7 @@ class RoomTypeController extends Controller
     {
         //
         $roomType = RoomType::findOrFail($id);
-        return view('admin.roomtype.edit',compact('roomType'));
+        return view('backend.roomtype.edit',compact('roomType'));
 
     }
 

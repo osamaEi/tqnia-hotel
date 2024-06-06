@@ -1,4 +1,4 @@
-@extends('admin.admin_dashboard')
+@extends('backend.admin_dashboard')
 
 @section('admin')
 <div class="page-content">
@@ -24,17 +24,16 @@
 <div class="col-lg-8">
 <div class="card">
 
-<form id="myForm" action="{{ route ('roomtype.update',$roomType->id)}}" method="post">
+<form id="myForm" action="{{ route ('roomtype.store')}}" method="post">
     @csrf
-    @method('PUT')
 
 <div class="card-body">
     <div class="row mb-3">
         <div class="col-sm-3">
-            <h6 class="mb-0"> Edit Room Type Name</h6>
+            <h6 class="mb-0"> Room Type Name</h6>
         </div>
         <div class="form-group col-sm-9 text-secondary">
-            <input type="text" name="name" class="form-control" value ="{{$roomType->name}}">
+            <input type="text" name="name" class="form-control">
         </div>
     </div>
 

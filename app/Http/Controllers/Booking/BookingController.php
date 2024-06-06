@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Booking;
 
 use App\Models\Booking;
 use Illuminate\Http\Request;
@@ -12,7 +12,7 @@ class BookingController extends Controller
     {
         $bookings = Booking::with(['user', 'room.roomType'])->get();
 
-        return view('admin.booking.index', compact('bookings'));
+        return view('backend.booking.index', compact('bookings'));
     }
 
     public function update(Request $request, Booking $booking)

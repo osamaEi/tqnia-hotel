@@ -13,17 +13,11 @@ class EmployeeController extends Controller
     public function EmployeeDashboard() {
 
 
-        return view('admin.index');
+        return view('backend.index');
 
     }
-  public function  roomsView() {
-    $rooms = Room::with('roomType')->get(); 
 
 
-    return view('employee.room.index',compact('rooms'));
-
-
-  }
 
   public function destroy(Request $request): RedirectResponse
     {

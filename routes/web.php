@@ -4,14 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Room\RoomController;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Room\RoomTypeController;
+use App\Http\Controllers\Booking\BookingController;
 use App\Http\Controllers\Employee\EmployeeController;
 
 // Public routes
-Route::get('/', function () {
-    return view('frontend.index');
-});
 
 Route::get('/dashboard', function () {
     return view('frontend.dashboard.user_dashboard');

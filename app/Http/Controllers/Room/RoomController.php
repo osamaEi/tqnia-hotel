@@ -25,7 +25,7 @@ class RoomController extends Controller
     {
       $rooms = Room::with('roomType')->get(); 
   
-    return view('admin.room.index', compact('rooms')); 
+    return view('backend.room.index', compact('rooms')); 
     }
 
     public function create()
@@ -33,7 +33,7 @@ class RoomController extends Controller
         $this->authorize('create', Room::class);
 
         $roomTypes= RoomType::all();
-      return view('admin.room.create',compact('roomTypes'));
+      return view('backend.room.create',compact('roomTypes'));
     }
     
     /**
@@ -76,7 +76,7 @@ class RoomController extends Controller
 
         $this->authorize('update', $room);
 
-        return view('admin.room.edit',compact('roomTypes','room'));
+        return view('backend.room.edit',compact('roomTypes','room'));
     }
 
     /**
