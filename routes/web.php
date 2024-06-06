@@ -9,6 +9,9 @@ use App\Http\Controllers\Booking\BookingController;
 use App\Http\Controllers\Employee\EmployeeController;
 
 // Public routes
+Route::get('/', function () {
+    return view('frontend.index');
+});
 
 Route::get('/dashboard', function () {
     return view('frontend.dashboard.user_dashboard');
@@ -23,6 +26,12 @@ Route::middleware('auth')->group(function () {
 
 // Auth routes
 require __DIR__.'/auth.php';
+
+Route::post('register', [AdminController::class, 'store'])->name('admin.register');
+
+Route::post('register/employee', [EmployeeController::class, 'store'])->name('employee.register');
+
+Route::get('/employee/register', [EmployeeController::class, 'create'])->name('employee.create');
 
 // Admin routes (admin middleware)
 Route::middleware(['admin'])->group(function () {

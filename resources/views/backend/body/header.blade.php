@@ -592,9 +592,7 @@
                         <p class="designattion mb-0">{{ $profileData->email }}</p>
                     </div>
 
-            <div class="user-box dropdown px-3">
-                <a class="d-flex align-items-center nav-link dropdown-toggle gap-3 dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                   
+          
 						</a>
 						<ul class="dropdown-menu dropdown-menu-end">
 							<li><a class="dropdown-item d-flex align-items-center" href=""><i class="bx bx-user fs-5"></i><span>Profile</span></a>

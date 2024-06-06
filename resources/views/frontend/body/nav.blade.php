@@ -33,7 +33,7 @@
                                     <a href="#" class="nav-link">
                                         
                                         <i class='bx bx-chevron-down'></i>
-                                        Restaurant
+                                        hotel
                                     </a>
                                     <ul class="dropdown-menu">
                                         <li class="nav-item">
@@ -50,17 +50,7 @@
                                             </a>
                                         </li>
 
-                                        <li class="nav-item">
-                                            <a href="privacy-policy.html" class="nav-link">
-                                                Privacy Policy
-                                            </a>
-                                        </li>
-
-                                        <li class="nav-item">
-                                            <a href="404.html" class="nav-link">
-                                                404 page
-                                            </a>
-                                        </li>
+                                     
                                         
                                         <li class="nav-item">
                                             <a href="coming-soon.html" class="nav-link">
@@ -69,23 +59,41 @@
                                         </li>
                                     </ul>
                                 </li>
-            <li class="nav-item">
-                                    <a href="" class="nav-link">
+                                <li class="nav-item">
+                                    <a href="#" class="nav-link">
                                         
                                         <i class='bx bx-chevron-down'></i>
-                                        All Rooms
+                                        login
                                     </a>
                                     <ul class="dropdown-menu">
-                               
+                                        <li class="nav-item">
+                                            <a href="{{ route('login') }}" class="nav-link">
+                                                login
+                                            </a>
+                                        </li>
+                                        
                                     
 
+                                        <li class="nav-item">
+                                            <a href="{{ route('register') }}" class="nav-link">
+Register as admin                                         </a>
+                                        </li>
+
+                                      
+                                        <li class="nav-item">
+                                            <a href="{{ route('employee.create') }}" class="nav-link">
+Register as employee                                         </a>
+                                        </li>
                                     </ul>
                                 </li>
                             </ul>
+                             
+            
 
-                            <div class="nav-btn">
-                                <a href="#" class="default-btn btn-bg-one border-radius-5">Book Now</a>
-                            </div>
+
+
+
+                      
                         </div>
                     </nav>
                 </div>

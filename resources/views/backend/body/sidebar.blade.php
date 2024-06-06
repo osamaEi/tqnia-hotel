@@ -23,7 +23,7 @@
                 </li>
             </ul>
         </li>
-
+        @if (auth('admin')->check())
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-category'></i></div>
@@ -42,18 +42,22 @@
                 </li>
             </ul>
         </li>
-        
+        @endif
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-bed'></i></div>
                 <div class="menu-title">Rooms</div>
             </a>
             <ul>
+                @if (auth('admin')->check())
+
                 <li> 
                     <a href="{{ route('room.create') }}">
                         <i class='bx bx-plus-circle'></i>Create Room
                     </a>
                 </li>
+                @endif
+
                 <li> 
                     <a href="{{ route('room.index') }}">
                         <i class='bx bx-show'></i>Show Rooms

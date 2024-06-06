@@ -25,10 +25,10 @@
                     <div class="user-all-form">
                         <div class="contact-form">
                             <div class="section-title text-center">
-                                <h2>Create an admin account!</h2>
+                                <h2>Create an Employee account!</h2>
                             </div>
 
-                            <form method="POST" action="{{ route('admin.register') }}">
+                            <form method="POST" action="{{ route('employee.register') }}">
       @csrf
         <!-- Confirm Password -->
         <div class="row">
