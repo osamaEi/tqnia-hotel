@@ -7,12 +7,12 @@
     <div class="ps-3">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb mb-0 p-0">
-          <a href="{{ route('room.create') }}" class="btn btn-outline-primary px-5 radius-30">Add Room Type</a>
+          <a href="{{ route('room.create') }}" class="btn btn-outline-primary px-5 radius-30">Add Room </a>
         </ol>
       </nav>
     </div>
   </div>
-  <h6 class="mb-0 text-uppercase">Room Type List</h6>
+  <h6 class="mb-0 text-uppercase">Room List</h6>
   <hr/>
   <div class="card">
     <div class="card-body">

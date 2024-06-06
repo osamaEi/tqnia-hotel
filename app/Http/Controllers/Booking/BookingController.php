@@ -27,6 +27,9 @@ class BookingController extends Controller
             $booking->room->update(['status' => 'booked']);
         } elseif ($request->status === 'Rejected') {
             $booking->room->update(['status' => 'available']);
+        }elseif($request->status === 'Pending'){
+            $booking->room->update(['status' => 'pending']);
+
         }
 
         return redirect()->route('admin.bookings.index')->with('success', 'Booking status updated successfully.');
