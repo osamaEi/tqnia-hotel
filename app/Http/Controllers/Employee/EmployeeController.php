@@ -13,7 +13,7 @@ class EmployeeController extends Controller
     public function EmployeeDashboard() {
 
 
-        return view('employee.index');
+        return view('admin.index');
 
     }
   public function  roomsView() {

@@ -6,7 +6,11 @@ use App\Models\Room;
 use App\Models\RoomType;
 use Illuminate\Http\Request;
 use App\Http\Requests\RoomRequest;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests; 
+
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
 
 class RoomController extends Controller
@@ -14,7 +18,9 @@ class RoomController extends Controller
     /**
      * Display a listing of the resource.
      */
-   
+
+       use AuthorizesRequests; 
+
      public function index()
     {
       $rooms = Room::with('roomType')->get(); 
@@ -24,6 +30,8 @@ class RoomController extends Controller
 
     public function create()
     {
+        $this->authorize('create', Room::class);
+
         $roomTypes= RoomType::all();
       return view('admin.room.create',compact('roomTypes'));
     }
@@ -36,17 +44,14 @@ class RoomController extends Controller
      
     $validatedData = $request->validated();
 
-    // Handle image upload
     if ($request->hasFile('image')) {
         $image = $request->file('image');
         $imageName = time() . '.' . $image->getClientOriginalExtension(); // Generate unique filename
         $image->storeAs('public/images/rooms', $imageName); // Save image to storage
 
-        // Update validated data with image path
         $validatedData['image'] = $imageName;
     }
 
-    // Create the room with validated data
     $room = Room::create($validatedData);
 
     return redirect()->route('room.index');
@@ -68,6 +73,9 @@ class RoomController extends Controller
     {
         $roomTypes= RoomType::all();
         $room = Room::find($id);
+
+        $this->authorize('update', $room);
+
         return view('admin.room.edit',compact('roomTypes','room'));
     }
 
@@ -77,27 +85,25 @@ class RoomController extends Controller
     public function update(RoomRequest $request, string $id)
     {
         $room = Room::findOrFail($id);
+
+        $this->authorize('update', $room);
+
         $validatedData = $request->validated();
     
-        // Handle image upload
         if ($request->hasFile('image')) {
-            // Delete the old image if it exists
             if ($room->image) {
                 Storage::delete('public/images/rooms/' . $room->image);
             }
     
             $image = $request->file('image');
-            $imageName = time() . '.' . $image->getClientOriginalExtension(); // Generate unique filename
-            $image->storeAs('public/images/rooms', $imageName); // Save image to storage
+            $imageName = time() . '.' . $image->getClientOriginalExtension(); 
+            $image->storeAs('public/images/rooms', $imageName); 
     
-            // Update validated data with new image path
             $validatedData['image'] = $imageName;
         } else {
-            // Keep the old image if no new image is uploaded
             $validatedData['image'] = $room->image;
         }
     
-        // Update the room with validated data
         $room->update($validatedData);
     
         return redirect()->route('room.index')->with('success', 'Room updated successfully!');
@@ -110,16 +116,18 @@ class RoomController extends Controller
     public function destroy(string $id)
     {
         $room = Room::findOrFail($id);
-        
+    
+        $this->authorize('delete', $room);
+    
         if ($room->image) {
             Storage::delete('public/images/rooms/' . $room->image);
         }
-        
+    
         $room->delete();
-        
+    
         return redirect()->route('room.index')->with('success', 'Room and its image deleted successfully!');
     }
-
+    
     public function updateStatus(Request $request, $id)
 {
     $request->validate([

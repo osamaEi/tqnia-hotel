@@ -50,12 +50,22 @@
                 </span>
               </td>
               <td>
+
+                @if (auth('admin')->check() && auth('admin')->user()->can('update', $room))
+
                 <a class="btn btn-success" href="{{ route('room.edit', $room->id) }}">Edit</a>
+
+                @endif
+
+          
+                @if (auth('admin')->check() && auth('admin')->user()->can('delete', $room))
+
                 <form action="{{ route('room.destroy', $room->id) }}" method="POST" style="display: inline-block">
                   @csrf
                   @method('DELETE')
                   <button type="submit" class="btn btn-danger" id="delete">Delete</button>
                 </form>
+@endif
                 <form action="{{ route('room.update-status', $room->id) }}" method="POST" class="d-inline-block">
                     @csrf
                     <select name="status" class="form-select form-select-sm room-status-select" data-room-id="{{ $room->id }}">

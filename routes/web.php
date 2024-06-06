@@ -29,16 +29,10 @@ require __DIR__.'/auth.php';
 
 // Admin routes (admin middleware)
 Route::middleware(['admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.index');
-
+ 
     Route::post('admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
-    Route::resource('roomtype', RoomTypeController::class);
-    
-    Route::resource('room', RoomController::class);
-
 
 });
-Route::post('/rooms/{id}/update-status', [RoomController::class, 'updateStatus'])->name('room.update-status');
 
 // Employee routes (employee middleware)
 Route::middleware(['employee'])->group(function () {
@@ -50,8 +44,16 @@ Route::middleware(['employee'])->group(function () {
 
 
 Route::middleware('auth:admin,employee')->group(function () {
+    
+    Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.index');
+
+
+    Route::resource('roomtype', RoomTypeController::class);
+    
+    Route::resource('room', RoomController::class);
 
     Route::post('/bookings/{booking}/update', [BookingController::class, 'update'])->name('admin.bookings.update');
     Route::get('/bookings', [BookingController::class, 'index'])->name('admin.bookings.index');
+    Route::post('/rooms/{id}/update-status', [RoomController::class, 'updateStatus'])->name('room.update-status');
 
 });
