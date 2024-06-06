@@ -35,7 +35,9 @@ Route::get('/employee/register', [EmployeeController::class, 'create'])->name('e
 
 // Admin routes (admin middleware)
 Route::middleware(['admin'])->group(function () {
- 
+    
+    Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.index');
+
     Route::post('admin/logout', [AdminController::class, 'destroy'])->name('admin.logout');
 
 });
@@ -43,7 +45,6 @@ Route::middleware(['admin'])->group(function () {
 // Employee routes (employee middleware)
 Route::middleware(['employee'])->group(function () {
     Route::get('/employee/dashboard', [EmployeeController::class, 'EmployeeDashboard'])->name('employee.index');
-    Route::get('/employee/rooms', [EmployeeController::class, 'roomsView'])->name('room.employee.view');
     Route::post('employee/logout', [EmployeeController::class, 'destroy'])->name('employee.logout');
 
 });
@@ -51,7 +52,6 @@ Route::middleware(['employee'])->group(function () {
 
 Route::middleware('auth:admin,employee')->group(function () {
     
-    Route::get('/admin/dashboard', [AdminController::class, 'AdminDashboard'])->name('admin.index');
 
 
     Route::resource('roomtype', RoomTypeController::class);
